@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\UserLevelController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -32,5 +33,13 @@ Route::middleware('auth')->group(function () {
 Route::get('/users', [UserController::class, 'index'])
     ->middleware(['auth'])
     ->name('users.index');
+
+Route::get('/users/{user}/edit', [UserLevelController::class, 'edit'])
+    ->middleware(['auth'])
+    ->name('userlevels.edit');
+
+Route::put('/users/{user}', [UserLevelController::class, 'update'])
+    ->middleware(['auth'])
+    ->name('userlevels.update');
 
 require __DIR__.'/auth.php';
