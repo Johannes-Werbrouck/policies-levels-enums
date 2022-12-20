@@ -49,4 +49,11 @@ class User extends Authenticatable
     {
         return User::all(); //should use pagination, but ok for now
     }
+
+    // Add this in the User model:
+    public static function getNumberOfAdmins()
+    {
+        // using ->count() is a much quicker database operation than using ->get() and counting in PHP.
+        return User::where('level', UserLevel::Administrator)->count();
+    }
 }
