@@ -1,3 +1,4 @@
+@php use App\Enums\UserLevel; @endphp
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
@@ -20,13 +21,22 @@
                     </thead>
                     <tbody>
                     @foreach($users as $user)
-                    <tr class="border">
-                        <td class="p-4">{{$user->id}}</td>
-                        <td class="p-4">{{$user->name}}</td>
-                        <td class="p-4">{{$user->email}}</td>
-                        <td class="p-4">Level here</td>
-                        <td class="p-4">Actions here</td>
-                    </tr>
+                        <tr class="border">
+                            <td class="p-4">{{$user->id}}</td>
+                            <td class="p-4">{{$user->name}}</td>
+                            <td class="p-4">{{$user->email}}</td>
+                            <td class="p-4">
+                            <span @class([
+                                   'px-2 py-1 font-semibold text-sm rounded-lg',
+                                   'text-indigo-700 bg-indigo-100' => UserLevel::Member === $user->level,
+                                   'text-sky-700 bg-sky-100' => UserLevel::Contributor === $user->level,
+                                   'text-teal-700 bg-teal-100' => UserLevel::Administrator === $user->level,
+                                   ])>
+                             {{__($user->level->name)}}
+                           </span>
+                            </td>
+                            <td class="p-4">Actions here</td>
+                        </tr>
                     @endforeach
                     </tbody>
                 </table>
