@@ -41,4 +41,9 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public static function getAllUsers()
+    {
+        return User::all(); //should use pagination, but ok for now
+    }
 }
