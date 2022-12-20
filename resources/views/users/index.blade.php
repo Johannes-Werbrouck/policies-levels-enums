@@ -35,7 +35,9 @@
                              {{__($user->level->name)}}
                            </span>
                             </td>
-                            <td class="p-4">Actions here</td>
+                            <td class="p-4">
+                                <a href="{{route('userlevels.edit', $user)}}" class="px-4 py-2 bg-gray-800 rounded-md font-semibold text-xs text-white uppercase tracking-widest">Edit</a>
+                            </td>
                         </tr>
                     @endforeach
                     </tbody>
