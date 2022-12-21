@@ -42,4 +42,8 @@ Route::put('/users/{user}', [UserLevelController::class, 'update'])
     ->middleware(['auth'])
     ->name('userlevels.update');
 
+Route::delete('/users/{user}', [UserController::class, 'destroy'])
+    ->middleware(['auth'])
+    ->name('users.destroy');
+
 require __DIR__.'/auth.php';
