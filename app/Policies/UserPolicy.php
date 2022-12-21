@@ -36,4 +36,22 @@ class UserPolicy
         }
         else return false;
     }
+
+    /**
+     * Determine whether the user can delete the model.
+     *
+     * @param  \App\Models\User  $loggedInUser the user that's trying to delete $model
+     * @param  \App\Models\User  $model the user that's being deleted by $loggedInUser
+     * @return \Illuminate\Auth\Access\Response|bool
+     */
+    public function delete(User $loggedInUser, User $model)
+    {
+        if (UserLevel::Administrator == $loggedInUser->level)
+        {
+            // when deleting an Admin, check if there will be admins left
+            if ($loggedInUser->is($model)) return User::getNumberOfAdmins() > 1;
+            else return true;
+        }
+        else return $loggedInUser->is($model);
+    }
 }
